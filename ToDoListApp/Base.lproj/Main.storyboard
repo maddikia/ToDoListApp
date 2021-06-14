@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,12 +32,143 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="To-Do List" id="7VQ-Wr-WD3">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="WWA-HG-EZK"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="WWA-HG-EZK">
+                            <connections>
+                                <segue destination="XUa-48-qaV" kind="show" id="UDt-ch-Svw"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="aFT-lm-ZDa" kind="show" identifier="moveToComplete" id="2ib-cD-Ja3"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S1O-UM-x2Y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1392.753623188406" y="2.6785714285714284"/>
+        </scene>
+        <!--Complete To Do View Controller-->
+        <scene sceneID="oUI-xN-KTv">
+            <objects>
+                <viewController id="aFT-lm-ZDa" customClass="CompleteToDoViewController" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9sa-F8-qbU">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To-Do Item Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="41b-yU-uu2">
+                                <rect key="frame" x="50" y="238" width="314" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZPW-60-mUF">
+                                <rect key="frame" x="130" y="322" width="154" height="50"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="69a-NL-6wk"/>
+                                    <constraint firstAttribute="width" constant="154" id="lT3-ic-tZF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Complete">
+                                    <color key="titleColor" red="0.96717751539999997" green="0.97990618750000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
+                                </state>
+                                <connections>
+                                    <action selector="completeTapped:" destination="aFT-lm-ZDa" eventType="touchUpInside" id="m61-ox-d3f"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="W1p-4D-rbh"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="W1p-4D-rbh" firstAttribute="trailing" secondItem="ZPW-60-mUF" secondAttribute="trailing" constant="130" id="BLL-zW-Wxy"/>
+                            <constraint firstItem="41b-yU-uu2" firstAttribute="leading" secondItem="W1p-4D-rbh" secondAttribute="leading" constant="50" id="BuY-Kn-of8"/>
+                            <constraint firstItem="W1p-4D-rbh" firstAttribute="trailing" secondItem="41b-yU-uu2" secondAttribute="trailing" constant="50" id="LIA-kJ-4qL"/>
+                            <constraint firstItem="41b-yU-uu2" firstAttribute="top" secondItem="W1p-4D-rbh" secondAttribute="top" constant="150" id="PUi-ba-UX0"/>
+                            <constraint firstItem="ZPW-60-mUF" firstAttribute="top" secondItem="41b-yU-uu2" secondAttribute="bottom" constant="60" id="eBq-th-8mR"/>
+                            <constraint firstItem="ZPW-60-mUF" firstAttribute="leading" secondItem="W1p-4D-rbh" secondAttribute="leading" constant="130" id="tRA-L3-Jaf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OfP-H9-Ecl"/>
+                    <connections>
+                        <outlet property="itemName" destination="41b-yU-uu2" id="poc-zn-nn2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3l6-2t-InT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1392.753623188406" y="679.6875"/>
+        </scene>
+        <!--Add To Do View Controller-->
+        <scene sceneID="khy-ky-FLN">
+            <objects>
+                <viewController id="XUa-48-qaV" customClass="AddToDoViewController" customModule="ToDoListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dyd-y8-W6u">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5i-Ug-WgE">
+                                <rect key="frame" x="180" y="208" width="54" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gfv-o2-gCJ">
+                                <rect key="frame" x="50" y="247" width="314" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Important:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01f-Nz-E8a">
+                                <rect key="frame" x="124" y="331" width="91" height="24"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="04Z-7L-QHS">
+                                <rect key="frame" x="245" y="328" width="51" height="31"/>
+                            </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLf-SK-oTP">
+                                <rect key="frame" x="130" y="409" width="154" height="50"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="154" id="7RG-Rx-ta0"/>
+                                    <constraint firstAttribute="height" constant="50" id="WHH-95-xXp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Add To-Do">
+                                    <color key="titleColor" red="0.96717751539999997" green="0.97990618750000003" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" weight="bold"/>
+                                </state>
+                                <connections>
+                                    <action selector="addTapped:" destination="XUa-48-qaV" eventType="touchUpInside" id="Fkg-Vn-L3V"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Xxb-rD-mkE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Xxb-rD-mkE" firstAttribute="trailing" secondItem="gfv-o2-gCJ" secondAttribute="trailing" constant="50" id="AVG-Nj-VBZ"/>
+                            <constraint firstItem="gfv-o2-gCJ" firstAttribute="top" secondItem="J5i-Ug-WgE" secondAttribute="bottom" constant="15" id="DKJ-ef-kgi"/>
+                            <constraint firstItem="Xxb-rD-mkE" firstAttribute="trailing" secondItem="04Z-7L-QHS" secondAttribute="trailing" constant="120" id="MXb-is-uXJ"/>
+                            <constraint firstItem="gfv-o2-gCJ" firstAttribute="leading" secondItem="Xxb-rD-mkE" secondAttribute="leading" constant="50" id="QPc-Yt-lJQ"/>
+                            <constraint firstItem="04Z-7L-QHS" firstAttribute="top" secondItem="gfv-o2-gCJ" secondAttribute="bottom" constant="47" id="UmZ-Uu-lzO"/>
+                            <constraint firstItem="NLf-SK-oTP" firstAttribute="leading" secondItem="Xxb-rD-mkE" secondAttribute="leading" constant="130" id="aFi-Qn-aN5"/>
+                            <constraint firstItem="01f-Nz-E8a" firstAttribute="top" secondItem="gfv-o2-gCJ" secondAttribute="bottom" constant="50" id="cV4-tq-Qbu"/>
+                            <constraint firstItem="Xxb-rD-mkE" firstAttribute="trailing" secondItem="J5i-Ug-WgE" secondAttribute="trailing" constant="180" id="fsO-Do-3Zj"/>
+                            <constraint firstItem="04Z-7L-QHS" firstAttribute="leading" secondItem="01f-Nz-E8a" secondAttribute="trailing" constant="30" id="gak-di-oX6"/>
+                            <constraint firstItem="Xxb-rD-mkE" firstAttribute="trailing" secondItem="NLf-SK-oTP" secondAttribute="trailing" constant="130" id="i6i-Kk-Vtj"/>
+                            <constraint firstItem="J5i-Ug-WgE" firstAttribute="leading" secondItem="Xxb-rD-mkE" secondAttribute="leading" constant="180" id="nzA-AJ-rba"/>
+                            <constraint firstItem="J5i-Ug-WgE" firstAttribute="top" secondItem="Xxb-rD-mkE" secondAttribute="top" constant="120" id="pRg-bZ-ex8"/>
+                            <constraint firstItem="NLf-SK-oTP" firstAttribute="top" secondItem="04Z-7L-QHS" secondAttribute="bottom" constant="50" id="pUo-xH-l42"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="ji6-PM-lHg"/>
+                    <connections>
+                        <outlet property="importantSwitch" destination="04Z-7L-QHS" id="l7U-1j-Q99"/>
+                        <outlet property="titleTextField" destination="gfv-o2-gCJ" id="XBS-YH-CMf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fyV-Yc-CQO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2139.130434782609" y="2.6785714285714284"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="sjZ-7Y-nzA">
@@ -58,6 +190,9 @@
         </scene>
     </scenes>
     <resources>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
