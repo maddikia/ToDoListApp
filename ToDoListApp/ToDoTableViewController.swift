@@ -9,28 +9,19 @@ import UIKit
 
 class ToDoTableViewController: UITableViewController {
     
-    var toDos : [ToDo] = []
+    var toDos : [ToDoCD] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        toDos = createToDos()
     }
     
-    func createToDos() -> [ToDo] {
-        
-        let swift = ToDo()
-        swift.name = "Learn Swift"
-        swift.important = true;
-        
-        let dog = ToDo()
-        dog.name = "Walk the dog"
-        
-        let work = ToDo()
-        work.name = "Finish up work for internship"
-        work.important = true
-        
-        return [swift, dog, work]
+    func getToDos() {
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            if let coreDataToDos = try? context.fetch(ToDoCD.fetchRequest()) as? [ToDoCD] {
+                toDos = coreDataToDos
+                tableView.reloadData()
+            }
+        }
     }
 
     // MARK: - Table view data source
@@ -46,10 +37,12 @@ class ToDoTableViewController: UITableViewController {
         
         let toDo = toDos[indexPath.row]
         
-        if toDo.important {
-            cell.textLabel?.text = "❗️" + toDo.name
-        } else {
-            cell.textLabel?.text = toDo.name
+        if let name = toDo.name {
+            if toDo.important {
+                cell.textLabel?.text = "❗️" + name
+            } else {
+                cell.textLabel?.text = name
+            }
         }
 
         return cell
@@ -59,6 +52,10 @@ class ToDoTableViewController: UITableViewController {
         let toDo = toDos[indexPath.row]
         performSegue(withIdentifier: "moveToComplete", sender: toDo)
     }
+    
+    override func viewWillAppear(_ animated : Bool) {
+        getToDos()
+    }
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,7 +63,7 @@ class ToDoTableViewController: UITableViewController {
             addVC.previousVC = self
         }
         else if let completeVC = segue.destination as? CompleteToDoViewController {
-            if let toDo = sender as? ToDo {
+            if let toDo = sender as? ToDoCD {
                 completeVC.selectedToDo = toDo
                 completeVC.previousVC = self
             }
