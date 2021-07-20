@@ -9,6 +9,9 @@ import UIKit
 
 class AddToDoViewController: UIViewController {
 
+    // this is a view controller
+    // this is another sentence
+    // wow many changes, time to commit
     var previousVC = ToDoTableViewController()
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var importantSwitch: UISwitch!
